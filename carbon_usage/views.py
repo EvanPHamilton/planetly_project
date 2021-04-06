@@ -33,13 +33,11 @@ class UsageViewSet(viewsets.ModelViewSet):
         # out usage's before given datetime
         timerange_start = self.request.query_params.get('timerange_start')
         if timerange_start is not None:
-            print("Timerange start: %s " % timerange_start)
             queryset = queryset.filter(usage_at__gte=timerange_start)
 
         # If timerange_end query param, filter out usage's after given datetime
         timerange_end = self.request.query_params.get('timerange_end')
         if timerange_end is not None:
-            print(timerange_end)
             queryset = queryset.filter(usage_at__lte=timerange_end)
 
         return queryset
