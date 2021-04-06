@@ -55,6 +55,9 @@ to run the django tests I wrote
 Or you can run
 `docker-compose exec web /usr/local/bin/python api_tests.py` 
 to run a python script, testing out the api routes. 
+A note on this test script. This ran without trouble on ubuntu 18.04.
+When setting up this repo from scrath on a mac, the first time I ran the script it failed with a networkign issue. 
+I had to run `docker-compose down` and `docker-compose up` again to get this script to run successfully.
 
 Or you can navigate to 'https://127.0.0.1:8000'
 to check out the minimal front end I wrote for the app.
