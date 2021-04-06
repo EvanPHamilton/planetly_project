@@ -10,21 +10,23 @@ on the project.
 #
 #####
 
-I wrote my project using django, django-rest-framework, docker and docker compose.
+I wrote my project using django, django-rest-framework, docker and docker compose. Docker and docker-compose will need to be installed on the system
+where you would like to run this, everything else will be installed
+by docker!
 
 To run the project, you should be able to simply execute:
 
 First: 
 `docker-compose -f docker-compose.yml up --build -d`
+This can take some time as we are building the docker image
 
-Then, if you are on linux you will need to run:
+If you are on linux you will then need to run:
 `sudo chown -R $USER .`
 to give docker permission to run the docker files. 
 This should not be a problem on mac osx/windows.
 
 Then run 
 `docker-compose up`
-
 To start the application.
 
 The first time you run `docker-compose up` you will have to run:
@@ -59,6 +61,8 @@ Finally, you can test the api manually using curl,
 although the endpoints are protected with an auth token
 generated on a per user basis. I ran out of time to implement 
 JWT tokens, or a more sensible session based authentication paradigm. 
+But the api_tests.py file contains an example of programatically
+creating a user and generating an auth token. 
 
 #####
 #
@@ -68,10 +72,11 @@ JWT tokens, or a more sensible session based authentication paradigm.
 
 There are two primary api endpoints
 
-/carbon_usage/usage
-/carbon_usage/usage_type
+`/carbon_usage/usage`
 
-corresponding to the usage and usage_type datamodels
+`/carbon_usage/usage_type`
+
+Corresponding to the usage and usage_type datamodels
 described in the prompt. I used django's user model 
 rather than rolling my own. There are a number of other
 api endpoints for django's admin app, authentication,
@@ -81,17 +86,27 @@ and token generation, these can be seen in the
 Both usage and usage_type support all CRUD commands
 
 POST   /usage_type/     -- CREATE
+
 GET    /usage_type/     -- READ
+
 GET    /usage_type/:id  -- READ all
+
 PUT    /usage_type/:id  -- UPDATE
+
 PATCH  /usage_type/:id  -- PARTIAL UPDATE
+
 DELETE /usage_type/:id  -- DELETE
 
 POST   /usage_type/     -- CREATE
+
 GET    /usage_type/     -- READ
+
 GET    /usage_type/:id  -- READ all
+
 PUT    /usage_type/:id  -- UPDATE
+
 PATCH  /usage_type/:id  -- PARTIAL UPDATE
+
 DELETE /usage_type/:id  -- DELETE
 
 #####
@@ -106,14 +121,14 @@ Pagination occurs by default, with 10 values per page.
 
 #####
 #
-# usage 
+# usage filtering and sorting
 #
 #####
 
-For the /usage/ endpoint you can sort on either 
-the 'usage_at' or 'usage_type' parameter, encoded
+For the `/usage/` endpoint you can sort on either 
+the `usage_at` or `usage_type` parameter, encoded
 as a url parameter as follows:
-/carbon_usage/usage/?ordering=-usage_type
+`/carbon_usage/usage/?ordering=-usage_type`
 
 Note the `-` in front of usage_type. This returns
 the result in descending order. If the `-` is not
@@ -121,7 +136,7 @@ included, the results will be returned in ascending order.
 The same can be done for the usage_at parameter.
 Ascending order is the default.
 
-Furthermore, the /usage/ endpoint supports two more
+Furthermore, the `/usage/` endpoint supports two more
 optional parameters `timerange_start` and `timerange_end`,
 these allow for filtering for /usage/ entries after or before
 the respective timeranges, which should be passed as datetimes.
@@ -131,13 +146,13 @@ These parameters can be used individually, or together.
 
 #####
 #
-# usage_type
+# usage_type filtering and sorting
 #
 #####
-For the /usage/usage_type endpoint you can sort on either 
-the 'unit', 'name' parameter, encoded
+For the `/usage/usage_type` endpoint you can sort on either 
+the `unit` or `name` parameters, encoded
 as a url parameter as follows:
-/carbon_usage/usage_type/?ordering=-name
+`/carbon_usage/usage_type/?ordering=-name`
 
 The same scheme with `-` applies, to allow returning
 in desecending order.
