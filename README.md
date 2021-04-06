@@ -14,18 +14,19 @@ I wrote my project using django, django-rest-framework, docker and docker compos
 where you would like to run this, everything else will be installed
 by docker!
 
-To run the project, you should be able to simply execute:
+To run the project, you should be able to simply execute the following commands.
 
 First, if you are on linux you will then need to run:
 
 `sudo chown -R $USER .`
+
+This will give your user accout permission to execute the dockerfiles.
 
 Secondly:
 
 `docker-compose -f docker-compose.yml up --build -d`
 This can take some time as we are building the docker image
 
-to give docker permission to run the docker files. 
 This should not be a problem on mac osx/windows.
 
 Then run 
@@ -164,3 +165,24 @@ as a url parameter as follows:
 The same scheme with `-` applies, to allow returning
 in desecending order.
 
+#####
+#
+# Notes on this project
+#
+#####
+Hey Planetly team, per your last set of requirements I am giving a bit of a description of my experience.
+
+This definitely took me longer than 2-4 hours to complete. I worked on over three days, for a couple hours each time. I over-estimated how much of django I remembered, and spent a good chunk of time re-familiarizing myself with it. Django provides so much and so many ways to do the same thing, I spent a lot of time wading through trying to understand the `django` way to do something. I think I could have done this whole project in flask in 4 hours, but ultimately you are looking for a django developer so I think it's good I read up. To be honest I don't have any strong opinions on how django code should be organized, so I would look forward to working with people who have more experience with the framework.
+
+If I had had more time, I would have liked to spend some more time providing docs, writing cleaner code, and implementing a token based auth system. Unfortunately, I spent most of my time reading through django docs. Great learning experience, but I was left feeling like I did not get to demonstrate as much of my software engineering experience as I wanted.
+
+
+The one major painpoint for me was django's handling of timezones. I originally updated my django settings to be timezone aware and to use Berlin's timezone. My gut instinct is to always store datetimes in the db in UNIX time and handle the timezones myself. It seems django is trying to abstract some of that complexity away from me, and I got a bit hung up on this, specifically django parsing timezone aware datetime strings -- so I ended up with some unpleasant string manipulation. I promise that would never make it into production!
+
+Lastly, most of my test coverage ended up covering features that django baked in. I think these tests would have made more sense if I was doing things like pagination manually. Maybe they are redundant and my test coverage time would have been better spent elsewhere, that is a lesson for the next time I use django! I use requests a lot to quickly test things personally, so I also wrote a small python script to test the api from the outside, using the requests library to validate the api routes. This was more a personal sanity check, though in production I would consider running a more robust version of this script nightly as part of a CI/CD system.
+
+Other than that, I think it mostly went well! Looking forward to hearing from you all!
+
+Cheers
+
+Evan
