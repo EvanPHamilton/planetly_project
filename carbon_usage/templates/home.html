@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>Hi Planetly team! This is a very simple demo
+  front end for my application project. </p>
+  <p> Please sign up for an account, or log into
+  an account you have previously made.</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <br>
+  <a href="{% url 'signup' %}">Sign Up </a>
+
+{% endif %}
+{% endblock %}
+

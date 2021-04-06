@@ -1,0 +1,10 @@
+venv/*
+todo.txt
+
+**/__pycache__
+**/*.pyc
+
+
+# Django stuff:
+*.log
+

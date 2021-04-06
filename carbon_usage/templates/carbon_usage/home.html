@@ -1,0 +1,12 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>Hi Planetly</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
