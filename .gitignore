@@ -1,6 +1,6 @@
 venv/*
 todo.txt
-
+data/
 **/__pycache__
 **/*.pyc
 
