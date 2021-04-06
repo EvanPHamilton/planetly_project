@@ -16,16 +16,20 @@ by docker!
 
 To run the project, you should be able to simply execute:
 
-First: 
+First, if you are on linux you will then need to run:
+
+`sudo chown -R $USER .`
+
+Secondly:
+
 `docker-compose -f docker-compose.yml up --build -d`
 This can take some time as we are building the docker image
 
-If you are on linux you will then need to run:
-`sudo chown -R $USER .`
 to give docker permission to run the docker files. 
 This should not be a problem on mac osx/windows.
 
 Then run 
+
 `docker-compose up`
 To start the application.
 
@@ -45,11 +49,11 @@ From there you have everything up and running!
 There are four things you can do from there
 
 First, you can run
-`docker-compose exec web /usr/local/bin/python manage.py tests`
+`docker-compose exec web /usr/local/bin/python manage.py test`
 to run the django tests I wrote
 
 Or you can run
-`python api_tests.py` 
+`docker-compose exec web /usr/local/bin/python api_tests.py` 
 to run a python script, testing out the api routes. 
 
 Or you can navigate to 'https://127.0.0.1:8000'
